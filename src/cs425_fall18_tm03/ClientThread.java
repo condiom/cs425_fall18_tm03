@@ -16,6 +16,8 @@ public class ClientThread extends Thread {
 	}
 
 	public void run() {
+		System.out.println("Client thread started");
 		// TODO
+		
 	}
 }

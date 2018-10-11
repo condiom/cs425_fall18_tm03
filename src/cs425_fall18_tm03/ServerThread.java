@@ -14,6 +14,6 @@ public class ServerThread extends Thread {
 	}
 
 	public void run() {
-		// TODO
+		System.out.println("Server thread started");
 	}
 }
