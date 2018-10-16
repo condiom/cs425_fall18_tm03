@@ -4,10 +4,7 @@ package cs425_fall18_tm03;
 public class Client {
  
     public static void main(String[] args) {
-    	args = new String[3];
-    	args[0]="localhost";
-    	args[1]="9000";
-    	args[2]="2";
+    	
         if (args.length < 2) return;
  
         String hostname = args[0];

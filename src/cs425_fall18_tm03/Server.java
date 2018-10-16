@@ -9,7 +9,6 @@ public class Server {
  
     public static void main(String[] args) {
     	args = new String[1];
-    	args[0]="9000";
         if (args.length < 1) return;
  
         int port = Integer.parseInt(args[0]);
