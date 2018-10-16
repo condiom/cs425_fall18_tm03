@@ -13,7 +13,7 @@ public class Server {
         if (args.length < 1) return;
  
         int port = Integer.parseInt(args[0]);
- 
+       
         try (ServerSocket serverSocket = new ServerSocket(port)) {
  
             System.out.println("Server is listening on port " + port);

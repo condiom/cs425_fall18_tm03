@@ -1,6 +1,7 @@
 package cs425_fall18_tm03;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,30 +27,38 @@ public class ClientThread extends Thread {
 	public void run() {
 		System.out.println("Client thread started");
 		try (Socket socket = new Socket(hostname, port)) {
-
+			// for writing to server
 			OutputStream output = socket.getOutputStream();
 			PrintWriter writer = new PrintWriter(output, true);
-			
+			// for reading from server
 			InputStream input = socket.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+			
 			String text;
-
-			for (int i=0; i<300; i++) {
-				text = "HELLO "+ Inet4Address.getLocalHost().getHostAddress()+" "+socket.getLocalPort()+" "+id;
-				
+			String ipAddress = Inet4Address.getLocalHost().getHostAddress();
+			String clientPort = socket.getLocalPort()+"";
+			
+		    double rtt=0;
+		    double iterations = 300;
+			for (int i=0; i<iterations; i++) {
+				text = "HELLO "+ ipAddress+" "+clientPort+" "+id;			
 				long startTime=System.currentTimeMillis();
 
 
 				writer.println(text);
-
 				String responseText = reader.readLine();
+				while(!responseText.equals("finish")) {
+					responseText = reader.readLine();
+				}
 				long finishTime=System.currentTimeMillis();
 				
-				//System.out.println(responseText);
-				long rtt=finishTime-startTime;
-				System.out.println(rtt);
+				rtt+=finishTime-startTime;
 
 			}
+			FileWriter fileWriter = new FileWriter("ClientRtt",true);
+		    PrintWriter printWriter = new PrintWriter(fileWriter);
+			printWriter.println(rtt/iterations);
+		    printWriter.close();
 			writer.println("Bye");
 
 			socket.close();
