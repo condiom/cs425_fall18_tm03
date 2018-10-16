@@ -1,32 +1,32 @@
 package cs425_fall18_tm03;
 
-
 import java.io.*;
 import java.net.*;
- 
 
 public class Server {
- 
-    public static void main(String[] args) {
-    	args = new String[1];
-        if (args.length < 1) return;
- 
-        int port = Integer.parseInt(args[0]);
-       
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
- 
-            System.out.println("Server is listening on port " + port);
- 
-            while (true) {
-                Socket socket = serverSocket.accept();
-                System.out.println("New client connected");
 
-                new ServerThread(socket).start();
-            }
- 
-        } catch (IOException ex) {
-            System.out.println("Server exception: " + ex.getMessage());
-            ex.printStackTrace();
-        }
-    }
+	public static void main(String[] args) {
+		if (args.length < 1) {
+			System.out.println("Please give port number");
+			return;
+		}
+
+		int port = Integer.parseInt(args[0]);
+
+		try (ServerSocket serverSocket = new ServerSocket(port)) {
+
+			System.out.println("Server is listening on port " + port);
+
+			while (true) {
+				Socket socket = serverSocket.accept();
+				System.out.println("New client connected");
+
+				new ServerThread(socket).start();
+			}
+
+		} catch (IOException ex) {
+			System.out.println("Server exception: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
 }
