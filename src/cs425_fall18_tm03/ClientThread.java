@@ -27,6 +27,7 @@ public class ClientThread extends Thread {
 	public void run() {
 		System.out.println("Client thread started");
 		try (Socket socket = new Socket(hostname, port)) {
+			System.out.println("here");
 			// for writing to server
 			OutputStream output = socket.getOutputStream();
 			PrintWriter writer = new PrintWriter(output, true);
@@ -39,8 +40,9 @@ public class ClientThread extends Thread {
 			String clientPort = socket.getLocalPort()+"";
 			
 		    double rtt=0;
-		    double iterations = 300;
+		    double iterations = 10;
 			for (int i=0; i<iterations; i++) {
+				System.out.println(id+" : "+i);
 				text = "HELLO "+ ipAddress+" "+clientPort+" "+id;			
 				long startTime=System.currentTimeMillis();
 
