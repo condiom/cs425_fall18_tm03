@@ -40,7 +40,7 @@ public class ClientThread extends Thread {
 			String clientPort = socket.getLocalPort()+"";
 			
 		    double rtt=0;
-		    double iterations = 10;
+		    double iterations = 300;
 			for (int i=0; i<iterations; i++) {
 				System.out.println(id+" : "+i);
 				text = "HELLO "+ ipAddress+" "+clientPort+" "+id;			
