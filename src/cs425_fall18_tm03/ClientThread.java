@@ -16,12 +16,14 @@ import java.net.UnknownHostException;
  */
 public class ClientThread extends Thread {
 	int id, port;
+	double iterations;
 	String hostname;
 
-	public ClientThread(int id, String hostname, int port) {
+	public ClientThread(int id, String hostname, int port, int iterations) {
 		this.id = id;
 		this.hostname = hostname;
 		this.port = port;
+		this.iterations = iterations;
 	}
 
 	public void run() {
@@ -40,7 +42,6 @@ public class ClientThread extends Thread {
 			String clientPort = socket.getLocalPort()+"";
 			
 		    double rtt=0;
-		    double iterations = 300;
 			for (int i=0; i<iterations; i++) {
 				System.out.println(id+" : "+i);
 				text = "HELLO "+ ipAddress+" "+clientPort+" "+id;			
